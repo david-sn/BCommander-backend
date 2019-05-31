@@ -7,7 +7,8 @@ var OrderDetails = new Schema({
         enum: ["pending", "confirmed", "shipping", "completed", "cancelled", "refunded", "failed"]
     },
     currency: {
-        type: String
+        type: String,
+        required: true
     },
     customer_note: {
         type: String
@@ -16,10 +17,10 @@ var OrderDetails = new Schema({
         type: String
     },
     customer_details: {
-        firstName: String,
-        lastName: String,
-        phoneNumber: String,
-        email: String
+        firstName: { type: String, required: true },
+        lastName: { type: String, required: true },
+        phoneNumber: { type: String, required: true },
+        email: { type: String, required: true }
     },
     shipping_address: {
         country: String,
@@ -29,10 +30,11 @@ var OrderDetails = new Schema({
     },
     payment_method: {
         type: String,
+        required: true,
         enum: ["COD", "CREDIT"]
     },
-    totalPriceOfOrder:{
-        type:Number
+    totalPriceOfOrder: {
+        type: Number
     }
 
 });

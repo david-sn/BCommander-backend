@@ -20,13 +20,12 @@ module.exports.createOrder = function (req, res) {
             //loop at items wants to buy on order
             var totalPriceOfOrder = 0.0;
             for (let index = 0; index < req.body.products.length; index++) {
-
                 const productObj = req.body.products[index];
 
                 let pd = await ProductDetail.findById(productObj.id).exec();
                 if (pd && pd.stock_quantity >= parseInt(productObj.quantity)) {
                     pd.stock_quantity = pd.stock_quantity - parseInt(productObj.quantity);
-                    pd.save();
+                    await pd.save();
 
                     let currentProductPrice = getProductCurrentPriceBasedOnQuntity(pd, parseInt(productObj.quantity));
                     totalPriceOfOrder = totalPriceOfOrder + currentProductPrice;
@@ -37,6 +36,9 @@ module.exports.createOrder = function (req, res) {
                         order_id: savedObj._id
                     });
                     newOrderItem.save();
+                } else {
+                    await OrderDetails.findByIdAndRemove(savedObj._id);
+                    return res.status(200).json({ status: "INSUFFICIENT_ITEM_QUNTITY" });
                 }
             }
             savedObj.totalPriceOfOrder = totalPriceOfOrder;
@@ -49,7 +51,7 @@ module.exports.createOrder = function (req, res) {
 }
 
 module.exports.updateOrder = function (req, res) {
-    OrderDetails.findById(req.body.orderId).exec().then(od => {
+    OrderDetails.findById(req.body.orderId).exec().then(async od => {
         if (od) {
             od.status = req.body.status ? req.body.status : od.status;
             od.currency = req.body.currency ? req.body.currency : od.currency;
@@ -57,7 +59,32 @@ module.exports.updateOrder = function (req, res) {
             od.store_note = req.body.store_note ? req.body.store_note : od.store_note;
             od.customer_details = req.body.customer_details ? req.body.customer_details : od.customer_details;
             od.payment_method = req.body.payment_method ? req.body.payment_method : od.payment_method;
+            if (req.body.products) {//if need update products in order
+                var totalPriceOfOrder = 0.0;
+                for (let index = 0; index < req.body.products.length; index++) {
+                    const productObj = req.body.products[index];
 
+                    let pd = await ProductDetail.findById(productObj.id).exec();
+                    if (pd && pd.stock_quantity >= parseInt(productObj.quantity)) {
+                        pd.stock_quantity = pd.stock_quantity - parseInt(productObj.quantity);
+                        await pd.save();
+
+                        let currentProductPrice = getProductCurrentPriceBasedOnQuntity(pd, parseInt(productObj.quantity));
+                        totalPriceOfOrder = totalPriceOfOrder + currentProductPrice;
+
+                        let newOrderItem = new OrderItem({
+                            product_id: pd._id,
+                            quantity: productObj.quantity,
+                            order_id: savedObj._id
+                        });
+                        newOrderItem.save();
+                    } else {
+                        await OrderDetails.findByIdAndRemove(savedObj._id);
+                        return res.status(200).json({ status: "INSUFFICIENT_ITEM_QUNTITY" });
+                    }
+                }
+                od.totalPriceOfOrder = totalPriceOfOrder;
+            }
             od.save((err, savedObj) => {
                 if (err) {
                     res.status(200).json({ status: "ERROR", error: err });
@@ -139,7 +166,7 @@ async function generateOrderTemplete(order) {
         for (let index = 0; index < orderItems.length; index++) {
             const orderItemDB = orderItems[index];
             let pDetailsDB = await ProductDetail.findById(orderItemDB.product_id).exec()
-            productsView.push({ productDetail:pDetailsDB, quantity: orderItemDB.quantity });
+            productsView.push({ productDetail: pDetailsDB, quantity: orderItemDB.quantity });
         }
         order.products = productsView;
 
