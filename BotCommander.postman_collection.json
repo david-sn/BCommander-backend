@@ -1,0 +1,338 @@
+{
+	"info": {
+		"_postman_id": "13f297c7-44a6-4e43-a126-e57bc40ea304",
+		"name": "BotCommander",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Product CRUD",
+			"item": [
+				{
+					"name": "addProduct",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"IOS\",\n    \"slug\": \"www.google.com/IOS\",\n    \"image\": \"/media/product/ios\",\n    \"description\": \"mobile IOS\",\n    \"regular_price\": \"1000\",\n    \"sale_price\": \"900\",\n    \"date_on_sale_from\": \"2019-05-31T10:14:58.403Z\",\n    \"date_on_sale_to\": \"2020-05-31T10:14:58.403Z\",\n    \"manage_stock\": true,\n    \"stock_quantity\": 100,\n    \"sku\": \"96584dda\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/addProduct",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"addProduct"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteProduct",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"productId\":\"5cf100821c03453c578f3cf3\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/deleteProduct",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"deleteProduct"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getProductDetail",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"productId\":\"5cf100821c03453c578f3cf3\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/getProductDetail",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"getProductDetail"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateProduct",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"productId\":\"5cf0ff091c03453c578f3cee\",\n\t\n\t   \"name\": \"IOS_OS\",\n    \"slug\": \"www.google.com/IOS_OS\",\n    \"image\": \"/media/product/ios_os\",\n    \"description\": \"mobile IOS_OS\",\n    \"regular_price\": \"700\",\n    \"sale_price\": \"700\",\n    \"date_on_sale_from\": \"2019-05-31T10:14:58.403Z\",\n    \"date_on_sale_to\": \"2020-05-31T10:14:58.403Z\",\n    \"manage_stock\": false,\n    \"stock_quantity\": 100,\n    \"sku\": \"96584dda\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/updateProduct",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"updateProduct"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllProduct",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"pageSize\":2,\n\t\"page\":0\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/getAllProduct",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"getAllProduct"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order Operations",
+			"item": [
+				{
+					"name": "createOrder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/createOrder",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"createOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateOrder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/updateOrder",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"updateOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cancelOrder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"orderId\":\"5cf110c232ef61595d90a0d3\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/cancelOrder",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"cancelOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "shippingOrder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"orderId\":\"5cf111e732ef61595d90a0d6\",\n\t\n\t\"country\":\"Giza\",\n\t\"city\":\"6th of October\",\n\t\"state\":\"Egypr\",\n\t\"addressLine\":\"B5 Building, Smart Village Cairo Giza Governorate EG, Giza Governorate\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/shippingOrder",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"shippingOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllOrder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"pageSize\":2,\n\t\"page\":0\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/getAllOrder",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"getAllOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOrderDetails",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"orderId\":\"5cf110c232ef61595d90a0d3\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3000/getOrderDetails",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"getOrderDetails"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
